@@ -82,7 +82,7 @@ public class Vehicle {
         this.vehicleType = vehicleType;
     }
 
-    public int getOdometer() {
+    public String getOdometer() {
         return odometer;
     }
 

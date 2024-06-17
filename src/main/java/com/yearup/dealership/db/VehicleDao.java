@@ -16,14 +16,61 @@ public class VehicleDao {
 
     public void addVehicle(Vehicle vehicle) {
         // TODO: Implement the logic to add a vehicle
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "INSERT INTO inventory (vin, make, model, year, price, color, Odometer, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
+
+            // Set the parameters in the SQL query from the vehicle object
+            preparedStatement.setString(1, vehicle.getVin());
+            preparedStatement.setString(2, vehicle.getMake());
+            preparedStatement.setString(3, vehicle.getModel());
+            preparedStatement.setInt(4, vehicle.getYear());
+            preparedStatement.setDouble(5, vehicle.getPrice());
+            preparedStatement.setString(6, vehicle.getColor());
+            preparedStatement.setString(7, vehicle.getOdometer());
+
+            int rowsInserted = preparedStatement.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("Vehicle added to inventory successfully.");
+            } else {
+                System.out.println("Failed to add vehicle to inventory.");
+            }
+
+        } catch (SQLException ex) {
+            System.err.println("An error occurred while trying to add the vehicle to inventory.");
+            ex.printStackTrace();
+        }
     }
 
-    public void removeVehicle(String VIN) {
-        // TODO: Implement the logic to remove a vehicle
+    public void removeVehicle(String vin) {
+        if (vin == null || vin.isEmpty()) {
+            System.out.println("Invalid VIN provided.");
+            return;
+        }
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "DELETE FROM inventory WHERE vin = ?")) {
+            preparedStatement.setString(1, vin);
+            int rowsDeleted = preparedStatement.executeUpdate();
+
+            if (rowsDeleted > 0) {
+                System.out.println("Vehicle removed from inventory successfully.");
+            } else {
+                System.out.println("Failed to remove vehicle from inventory. Vehicle not found.");
+            }
+
+        } catch (SQLException ex) {
+            System.err.println("An error occurred while trying to remove the vehicle from inventory.");
+            ex.printStackTrace();
+        }
+
     }
 
     public List<Vehicle> searchByPriceRange(double minPrice, double maxPrice) {
         // TODO: Implement the logic to search vehicles by price range
+
+        try( Connection.)
         return new ArrayList<>();
     }
 

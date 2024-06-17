@@ -80,5 +80,6 @@ public class LeaseContract {
     }
 
     public String getLeaseEndDate() {
+        return null;
     }
 }
