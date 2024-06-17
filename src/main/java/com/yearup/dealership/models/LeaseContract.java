@@ -74,4 +74,11 @@ public class LeaseContract {
                 ", monthlyPayment=" + monthlyPayment +
                 '}';
     }
+
+    public String getLeaseStartDate() {
+        return null;
+    }
+
+    public String getLeaseEndDate() {
+    }
 }
