@@ -83,7 +83,7 @@ public class Vehicle {
     }
 
     public String getOdometer() {
-        return odometer;
+        return String.valueOf(odometer);
     }
 
     public void setOdometer(int odometer) {
